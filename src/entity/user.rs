@@ -1,10 +1,10 @@
-use serde::{Deserialize, Serialize};
+use serde::Serialize;
 use sqlx::{Error, FromRow, Row};
 use sqlx::postgres::PgRow;
 
-#[derive(Serialize, Deserialize, Clone)]
+#[derive(Serialize)]
 pub struct User {
-    pub id: String,
+    pub id: i32,
     pub first_name: String,
     pub last_name: String,
     pub email: String,
