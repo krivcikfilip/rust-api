@@ -1,0 +1,15 @@
+version: "3.8"
+services:
+  database:
+    container_name: rust-api-db
+    image: postgres:14-alpine
+    working_dir: /rust-api
+    volumes:
+      - .:/rust-api
+      - ./.data/db-local:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=rust-api
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=password
+    ports:
+      - "55432:5432"

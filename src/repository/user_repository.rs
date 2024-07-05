@@ -8,7 +8,7 @@ impl<'c> Table<'c, User> {
         sqlx::query_as(
             r#"
             SELECT id, first_name, last_name, email
-            FROM users
+            FROM "user"
             "#,
         )
         .fetch_all(&*self.pool)
@@ -19,7 +19,7 @@ impl<'c> Table<'c, User> {
         sqlx::query_as(
             r#"
             SELECT id, first_name, last_name, email
-            FROM users
+            FROM "user"
             WHERE id = $1
             "#,
         )
@@ -31,7 +31,7 @@ impl<'c> Table<'c, User> {
     pub async fn create_user(&self, body: &CreateUserBody) -> Result<(), sqlx::Error> {
         sqlx::query(
             r#"
-            INSERT INTO users (first_name, last_name, email)
+            INSERT INTO "user" (first_name, last_name, email)
             VALUES ($1, $2, $3)
             "#,
         )
@@ -51,7 +51,7 @@ impl<'c> Table<'c, User> {
     ) -> Result<(), sqlx::Error> {
         sqlx::query(
             r#"
-            UPDATE users SET first_name = $1, last_name = $2, email = $3
+            UPDATE "user" SET first_name = $1, last_name = $2, email = $3
             WHERE id = $4
             "#,
         )
